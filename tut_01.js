@@ -12,4 +12,3 @@ const queryBlockchain = async()=>{
 }
 
 queryBlockchain();
-
