@@ -101,6 +101,12 @@ const contractInteraction =async()=>{
     const WalletCon = new ethers.Contract(conAddress,abi,provider);
     const walletName = await WalletCon.name();
     console.log("Currently interacting with wallet : ",walletName);
+    const bal = await WalletCon.getBalance();
+    console.log("Current balance : ",bal);
+    const getBalanceFromAddress = await WalletCon.getAddressBal(conAddress);
+    console.log("current balance is contract address : ",conAddress,"\n Amount to : ",getBalanceFromAddress);
+
+
 }
 
 contractInteraction();
