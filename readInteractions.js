@@ -1,4 +1,4 @@
-const {ethers,JsonRpcProvider} = require('ethers');
+const {ethers,JsonRpcProvider,utils,BigNumber} = require('ethers');
 const provider = new JsonRpcProvider(`https://sepolia.infura.io/v3/3c7eac9b2dd149b8ab3abf0ae6cc321b`); // infura sepolia testnet integration
 
 const conAddress = "0x41e0d8031a72b9bd084a4c152cd22ba366e64965"; // this is the address of the deployed contract
@@ -102,9 +102,11 @@ const contractInteraction =async()=>{
     const walletName = await WalletCon.name();
     console.log("Currently interacting with wallet : ",walletName);
     const bal = await WalletCon.getBalance();
-    console.log("Current balance : ",bal);
+    console.log("balance : ",String(bal)); // String() method is used to convert bignumber to readable strings
     const getBalanceFromAddress = await WalletCon.getAddressBal(conAddress);
-    console.log("current balance is contract address : ",conAddress,"\n Amount to : ",getBalanceFromAddress);
+    console.log("current balance is contract address : ",conAddress,"\n Amount to : ",String(getBalanceFromAddress));
+    const myBal = await WalletCon.getAddressBal('0xd5bf951EbF7EB95aAEf24CF0aa07758CCbaD92F6');
+    console.log("Your faucet Bal : ",String(myBal));
 
 
 }
