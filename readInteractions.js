@@ -1,5 +1,5 @@
-const {ethers,JsonRpcProvider,utils,BigNumber} = require('ethers');
-const provider = new JsonRpcProvider(`https://sepolia.infura.io/v3/3c7eac9b2dd149b8ab3abf0ae6cc321b`); // infura sepolia testnet integration
+const {ethers} = require('ethers');
+const provider = new ethers.providers.JsonRpcProvider(`https://sepolia.infura.io/v3/3c7eac9b2dd149b8ab3abf0ae6cc321b`); // infura sepolia testnet integration
 
 const conAddress = "0x41e0d8031a72b9bd084a4c152cd22ba366e64965"; // this is the address of the deployed contract
 // to interact with the contract we also need the contract ABI (abstract binary interface)
@@ -101,12 +101,15 @@ const contractInteraction =async()=>{
     const WalletCon = new ethers.Contract(conAddress,abi,provider);
     const walletName = await WalletCon.name();
     console.log("Currently interacting with wallet : ",walletName);
-    const bal = await WalletCon.getBalance();
-    console.log("balance : ",String(bal)); // String() method is used to convert bignumber to readable strings
-    const getBalanceFromAddress = await WalletCon.getAddressBal(conAddress);
-    console.log("current balance is contract address : ",conAddress,"\n Amount to : ",String(getBalanceFromAddress));
-    const myBal = await WalletCon.getAddressBal('0xd5bf951EbF7EB95aAEf24CF0aa07758CCbaD92F6');
-    console.log("Your faucet Bal : ",String(myBal));
+     const bal = await WalletCon.getBalance();
+     console.log("balance : ",String(bal)); // String() method is used to convert bignumber to readable strings
+    // const getBalanceFromAddress = await WalletCon.getAddressBal(conAddress);
+    // console.log("current balance is contract address : ",conAddress,"\n Amount to : ",String(getBalanceFromAddress));
+    // const myBal = await WalletCon.getAddressBal('0xd5bf951EbF7EB95aAEf24CF0aa07758CCbaD92F6');
+    // console.log("Your faucet Bal : ",String(myBal));
+	// querying for contract balance
+	const cBal = await WalletCon.contractBal();
+	console.log("Current contract balance is : ",String(cBal));
 
 
 }
